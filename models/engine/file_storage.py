@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This is the file storage class for AirBnB"""
+"""Defines the FileStorage class."""
 import json
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -12,6 +12,7 @@ from models.user import User
 
 class FileStorage:
     """Represent an abstracted storage engine.
+
     Attributes:
         __file_path (str): The name of the file to save objects to.
         __objects (dict): A dictionary of instantiated objects.
@@ -21,9 +22,10 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """returns a dictionary
-        Return:
-            returns a dictionary of __object
+        """Return a dictionary of instantiated objects in __objects.
+
+        If a cls is specified, returns a dictionary of objects of that type.
+        Otherwise, returns the __objects dictionary.
         """
         if cls is not None:
             if type(cls) == str:
@@ -36,9 +38,7 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """sets __object to given obj
-        Args:
-            obj: given object"""
+        """Set in __objects obj with key <obj_class_name>.id."""
         self.__objects["{}.{}".format(type(obj).__name__, obj.id)] = obj
 
     def save(self):
@@ -66,5 +66,5 @@ class FileStorage:
             pass
 
     def close(self):
-        """calls reload()"""
+        """Call the reload method."""
         self.reload()
