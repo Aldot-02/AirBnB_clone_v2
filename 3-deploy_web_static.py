@@ -7,11 +7,11 @@ from fabric.api import local
 from fabric.api import put
 from fabric.api import run
 
-env.hosts = ["54.160.85.72", "35.175.132.106"]
+env.hosts = ["104.196.168.90", "35.196.46.172"]
 
 
 def do_pack():
-    """Creating a tar gzipped archive of the web_static directory."""
+    """Create a tar gzipped archive of the directory web_static."""
     dt = datetime.utcnow()
     file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
                                                          dt.month,
@@ -29,6 +29,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Distributes an archive to a web server.
+
     Args:
         archive_path (str): The path of the archive to distribute.
     Returns:
@@ -68,7 +69,7 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Creating and distributing an archive to a web server."""
+    """Create and distribute an archive to a web server."""
     file = do_pack()
     if file is None:
         return False
